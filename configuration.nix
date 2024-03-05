@@ -1,7 +1,7 @@
-{cofig, pkgs,  ...}:
+{ config, pkgs,  ... }:
 {
   #Important system setup
-  imports = ./hardware-configuration.nix; #Can be a list.
+  imports = [ ./hardware-configuration.nix ];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -65,22 +65,54 @@
   environment.systemPackages = with pkgs; [
     git
     neovim
-    vim-gtk
-    flatpak
     wget
+    #vim-gtk
+    flatpak
+    distrobox
+    podman
+    htop
     neofetch
     ranger
     w3m
+    links2
+    hardinfo
+    qtcreator
+    glade
+    tmux
+    openssl_3_1
     gcc
     rustc
     cargo
-    htop
+    python3
+    python311Packages.pip
+    go
+    luajit_openresty
+    jdk21
+    perl
+    nodejs_21
+    ruby
+    R
+    mysql80
+    dgraph
+    gnome.gnome-tweaks
   ];
+  #let 
+  #  nixvim = import (builtins.fetchGit {
+  #    url = "https://github.com/nix-community/nixvim";
+  #    ref = "nixos-23.05";
+  #  });
+  #in
+  #{
+  #  imports = [ nixvim.nixosModules.nixvim ];
+  #  programs.nixvim.enable = true;
+  #}
+  
   system.stateVersion = "23.11";
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   #Services and Daemon Setup
   # services.openssh.enable = true;
+  services.flatpak.enable = true;
 
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
