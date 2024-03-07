@@ -4,6 +4,8 @@
   imports = [ ./hardware-configuration.nix ];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  #To fix libstdc++ problem for jupyter
+
 
   #network setup
   networking.hostName = "shakarisviewerofcarnage";
@@ -80,11 +82,13 @@
     glade
     tmux
     openssl_3_1
-    gcc
+    libgccjit
     rustc
     cargo
-    python3
+    python3Full
     python311Packages.pip
+    python311Packages.virtualenv
+    jupyter-all
     go
     luajit_openresty
     jdk21
@@ -116,4 +120,7 @@
 
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
+
+
+  #Notes:
 }
