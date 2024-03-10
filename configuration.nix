@@ -86,6 +86,7 @@
     rustc
     cargo
     python3Full
+    python311Packages.cython_3
     python311Packages.pip
     python311Packages.virtualenv
     jupyter-all
