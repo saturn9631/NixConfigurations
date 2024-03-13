@@ -55,10 +55,18 @@
     description = "Shakari Wade";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      firefox
+      #firefox
+      firefox-devedition
       thunderbird
+      birdtray
       keepassxc
       libreoffice
+      godot_4
+      gimp
+      audacity
+      blender
+      openrgb
+      steam
     ];
   };
 
@@ -66,10 +74,17 @@
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
     git
+    gitg
     neovim
     wget
-    #vim-gtk
+    gnutar
+    zip
+    unzip
+    gzip
+    neovim-gtk
+    #neovim-qt
     flatpak
+    flatpak-builder
     distrobox
     podman
     htop
@@ -81,6 +96,9 @@
     qtcreator
     glade
     tmux
+    clamav
+    clamtk
+    clamsmtp
     openssl_3_1
     libgccjit
     rustc
@@ -92,6 +110,7 @@
     jupyter-all
     go
     luajit_openresty
+    luajitPackages.luarocks
     jdk21
     perl
     nodejs_21
