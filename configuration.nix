@@ -1,13 +1,13 @@
-{ config, pkgs,  ... }:
+{ config, pkgs, inputs, ... }:
 {
   #Important system setup
-  imports = [ ./hardware-configuration.nix ];
+  imports = [ ./hardware-configuration.nix ];#inputs.home-manager.nixosModules.home-manager];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  #To fix libstdc++ problem for jupyter
+  
 
 
-  #network setup
+  #Network setup
   networking.hostName = "shakarisviewerofcarnage";
   networking.networkmanager.enable = true;
 
@@ -25,7 +25,15 @@
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
   };
-  
+
+  #Security Setup
+  security.sudo.extraRules = [
+    {
+      groups = ["wheel"];
+      commands = [{ command = "ALL"; options = ["PASSWD"];}];
+    }
+  ];
+
   #Desktop Setup
   services.xserver.enable = true;
   services.xserver.displayManager.gdm.enable = true;
@@ -67,8 +75,15 @@
       blender
       openrgb
       steam
+      vlc
     ];
   };
+  #home-manager = {
+  #  extraSpecialArgs = { inherit inputs; };
+  #  users = {
+  #    saturnfulcrum = import ./home.nix;
+  #  };
+  #};
 
   #Packages Setup
   nixpkgs.config.allowUnfree = true;
@@ -78,11 +93,14 @@
     gitg
     neovim
     wget
+    curl
     gnutar
     zip
     unzip
     gzip
     neovim-gtk
+    wl-clipboard
+    #wl-clipboard-x11
     #neovim-qt
     flatpak
     flatpak-builder
@@ -102,6 +120,8 @@
     clamsmtp
     openssl_3_1
     libgccjit
+    libllvm
+    llvm-manpages
     rustc
     cargo
     python3Full
@@ -109,17 +129,26 @@
     python311Packages.pip
     python311Packages.virtualenv
     jupyter-all
+    haskell.compiler.native-bignum.ghc981
     go
     luajit_openresty
     luajitPackages.luarocks
     jdk21
+    clojure
     perl
     nodejs_21
     ruby
     R
+    cmucl_binary #common-lisp
     mysql80
     dgraph
     gnome.gnome-tweaks
+    hollywood
+    ffmpeg_4-full
+    #Essential Tools
+    #Bash Tools
+    #Programming Languages
+    #User Shared Programs
   ];
   #let 
   #  nixvim = import (builtins.fetchGit {
