@@ -44,6 +44,20 @@
   };
 
   #I/O and Driver Setup
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    #driSupport32bit = true;
+  };
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia = {
+    modesetting.enable = true;
+    powerManagement.enable = false;
+    powerManagement.finegrained = false;
+    open = true;
+    nvidiaSettings = true;
+    #packages = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
   services.printing.enable = true;
   sound.enable = true;
   hardware.pulseaudio.enable = false;
